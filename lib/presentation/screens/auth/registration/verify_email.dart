@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:stackivy_assesement/constants/app_style.dart';
-import 'package:stackivy_assesement/constants/colors.dart';
-
+import 'package:stackivy_assesement/style/app_style.dart';
+import 'package:stackivy_assesement/style/colors.dart';
+import 'package:stackivy_assesement/presentation/screens/auth/registration/complete_profile.dart';
 import '../../../widgets/stackivy_button.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
@@ -12,6 +11,7 @@ class VerifyEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -45,7 +45,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 fontSize: 30.0,
               ),
             ),
-            SizedBox(height: size.height * 0.1),
+            SizedBox(height: size.height * 0.15),
             StackivyButton(
               onPressed: () {},
               backgroundColor: Colors.white,
@@ -55,7 +55,13 @@ class VerifyEmailScreen extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.03),
             StackivyButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => CompleteProfileScreen(),
+                  ),
+                );
+              },
               backgroundColor: kPrimaryColor,
               borderColor: Colors.transparent,
               title: 'Continue',

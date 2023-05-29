@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:stackivy_assesement/constants/colors.dart';
+import 'package:stackivy_assesement/style/colors.dart';
 import 'package:stackivy_assesement/presentation/screens/auth/login/login.dart';
 import 'package:stackivy_assesement/presentation/screens/onboarding/onboarding.dart';
 import '../../constants/pref_key.dart';

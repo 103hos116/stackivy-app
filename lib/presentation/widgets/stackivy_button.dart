@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/app_style.dart';
-import '../../constants/colors.dart';
+import '../../style/app_style.dart';
+import '../../style/colors.dart';
 
 class StackivyButton extends StatelessWidget {
   final Color? backgroundColor;

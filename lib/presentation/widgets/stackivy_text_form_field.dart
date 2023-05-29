@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stackivy_assesement/constants/app_style.dart';
-import 'package:stackivy_assesement/constants/colors.dart';
+import 'package:stackivy_assesement/style/app_style.dart';
+import 'package:stackivy_assesement/style/colors.dart';
 
 class StackivyTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -34,6 +34,7 @@ class StackivyTextFormField extends StatelessWidget {
       ),
       keyboardType: textInputType,
       decoration: InputDecoration(
+        errorMaxLines: 2,
         hintText: hintText,
         hintStyle: StackivyStyle.regular(color: kGray400, fontSize: 12.0),
         contentPadding: const EdgeInsets.all(20.0),

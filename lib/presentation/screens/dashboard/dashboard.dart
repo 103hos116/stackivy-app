@@ -2,8 +2,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:stackivy_assesement/constants/app_style.dart';
-import 'package:stackivy_assesement/constants/colors.dart';
+import 'package:stackivy_assesement/presentation/screens/auth/login/login.dart';
+import 'package:stackivy_assesement/style/app_style.dart';
+import 'package:stackivy_assesement/style/colors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -140,7 +141,13 @@ class DashboardScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                    );
+                  },
                   child: Row(
                     children: [
                       SvgPicture.asset('images/logout.svg'),

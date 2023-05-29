@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:stackivy_assesement/constants/app_style.dart';
-import 'package:stackivy_assesement/constants/colors.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:stackivy_assesement/style/app_style.dart';
+import 'package:stackivy_assesement/style/colors.dart';
 import 'package:stackivy_assesement/models/podos/onboarding_contents.dart';
 import 'package:stackivy_assesement/presentation/screens/auth/login/login.dart';
+import 'package:stackivy_assesement/presentation/screens/auth/registration/getting_started.dart';
 
 import '../../../constants/pref_key.dart';
 import '../../../services/shared_prefs.dart';
@@ -29,7 +31,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(
             horizontal: 30.0,
-            vertical: 40.0,
+            vertical: 20.0,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -109,7 +111,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             prefs.setBool(PrefKey.kOnboardingKey, true);
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
+                                builder: (context) => GettingStartedScreen(),
                               ),
                             );
                             Curves.easeIn;
@@ -120,13 +122,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               curve: Curves.easeIn,
                             );
                           },
-                    child: Container(
-                      color: kPrimaryColor,
-                      height: 50.0,
-                      child: const Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                      ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        pageProgress(size, _currentPage),
+                        Container(
+                          padding: EdgeInsets.all(size.width * 0.03),
+                          decoration: const BoxDecoration(
+                            color: kPrimaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.arrow_forward_sharp,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -150,6 +161,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       margin: const EdgeInsets.only(right: 2),
       height: 7,
       width: _currentPage == index ? 30 : 7,
+    );
+  }
+
+  Widget pageProgress(Size size, int index) {
+    return SizedBox(
+      height: size.height * 0.09,
+      width: size.width * 0.2,
+      child: CircularProgressIndicator(
+        color: kPrimaryColor,
+        backgroundColor: kPrimaryLight,
+        value: index == 0
+            ? 0.3
+            : index == 1
+                ? 0.6
+                : 1.0,
+      ),
     );
   }
 }

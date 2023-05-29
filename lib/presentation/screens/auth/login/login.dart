@@ -1,17 +1,20 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:stackivy_assesement/constants/app_style.dart';
-import 'package:stackivy_assesement/constants/colors.dart';
+import 'package:stackivy_assesement/style/app_style.dart';
+import 'package:stackivy_assesement/style/colors.dart';
+import 'package:stackivy_assesement/presentation/screens/auth/registration/getting_started.dart';
 import 'package:stackivy_assesement/presentation/screens/dashboard/dashboard.dart';
 import 'package:stackivy_assesement/presentation/widgets/stackivy_button.dart';
 import 'package:stackivy_assesement/presentation/widgets/stackivy_text_form_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../../utils/validators.dart';
 
 class LoginScreen extends StatelessWidget {
-  // const LoginScreen({Key? key}) : super(key: key);
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -56,146 +59,160 @@ class LoginScreen extends StatelessWidget {
                 ),
                 background: SvgPicture.asset(
                   'images/background.svg',
-                  fit: BoxFit.cover,
                 ),
               ),
             ),
             SliverToBoxAdapter(
-              child: Container(
-                color: kPrimaryColor,
-                child: Column(
-                  children: [
-                    Container(
-                      height: size.height * 0.02,
-                      margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                      decoration: const BoxDecoration(
-                        color: kPrimaryLight,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
+              child: Form(
+                key: formKey,
+                child: Container(
+                  color: kPrimaryColor,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: size.height * 0.02,
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                        decoration: const BoxDecoration(
+                          color: kPrimaryLight,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      height: size.height * 0.9,
-                      padding: const EdgeInsets.symmetric(horizontal: 36.0),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
+                      Container(
+                        height: size.height * 0.9,
+                        padding: const EdgeInsets.symmetric(horizontal: 36.0),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
                         ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          SizedBox(height: size.height * 0.05),
-                          Text(
-                            'Welcome !',
-                            style: StackivyStyle.bold(
-                                color: kBigTextColor, fontSize: 36.0),
-                          ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            'Here’s how to Log in to access your account',
-                            style: StackivyStyle.regular(
-                                color: kGray500, fontSize: 12.0),
-                          ),
-                          SizedBox(height: size.height * 0.05),
-                          StackivyTextFormField(
-                            hintText: 'Email Address',
-                            controller: _emailController,
-                            textInputType: TextInputType.emailAddress,
-                            obscureText: false,
-                            validator: (text) {},
-                            prefixIcon: const Icon(
-                              Icons.mail_outline,
-                              color: kGray400,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            SizedBox(height: size.height * 0.05),
+                            Text(
+                              'Welcome !',
+                              style: StackivyStyle.bold(
+                                  color: kBigTextColor, fontSize: 36.0),
                             ),
-                          ),
-                          SizedBox(height: size.height * 0.03),
-                          StackivyTextFormField(
-                            hintText: 'Password',
-                            controller: _passwordController,
-                            textInputType: TextInputType.text,
-                            obscureText: true,
-                            validator: (text) {},
-                            prefixIcon: const Icon(
-                              Icons.lock_outline,
-                              color: kGray400,
+                            const SizedBox(height: 8.0),
+                            Text(
+                              'Here’s how to Log in to access your account',
+                              style: StackivyStyle.regular(
+                                  color: kGray500, fontSize: 12.0),
                             ),
-                            suffixIcon: const Icon(
-                              Icons.visibility_outlined,
-                              color: kGray400,
-                            ),
-                          ),
-                          const SizedBox(height: 12.0),
-                          InkWell(
-                            onTap: null,
-                            child: Text(
-                              'Forgot Password?',
-                              textAlign: TextAlign.end,
-                              style: StackivyStyle.medium(
-                                  color: kPrimaryColor, fontSize: 11.0),
-                            ),
-                          ),
-                          SizedBox(height: size.height * 0.045),
-                          StackivyButton(
-                            onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => DashboardScreen(),
-                                ),
-                              );
-                            },
-                            title: 'Log In',
-                          ),
-                          SizedBox(height: size.height * 0.05),
-                          StackivyButton(
-                            backgroundColor: Colors.white,
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const FaIcon(
-                                  FontAwesomeIcons.signIn,
-                                  color: kPrimaryColor,
-                                ),
-                                SizedBox(width: size.height * 0.02),
-                                Text(
-                                  'Sign in with SAN ID',
-                                  style: StackivyStyle.bold(
-                                    color: kPrimaryColor,
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: size.height * 0.03),
-                          Text.rich(
-                            TextSpan(
-                              children: [
-                                const TextSpan(text: 'New User?  '),
-                                TextSpan(
-                                  text: 'Create Acccount',
-                                  style: StackivyStyle.medium(
-                                    color: kPrimaryColor,
-                                    fontSize: 12.0,
-                                  ),
-                                ),
-                              ],
-                              style: StackivyStyle.medium(
-                                color: kGray500,
-                                fontSize: 12.0,
+                            SizedBox(height: size.height * 0.05),
+                            StackivyTextFormField(
+                              hintText: 'Email Address',
+                              controller: _emailController,
+                              textInputType: TextInputType.emailAddress,
+                              obscureText: false,
+                              validator: (text) =>
+                                  StackivyValidators.emailValidator(text!),
+                              prefixIcon: const Icon(
+                                Icons.mail_outline,
+                                color: kGray400,
                               ),
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                            SizedBox(height: size.height * 0.03),
+                            StackivyTextFormField(
+                              hintText: 'Password',
+                              controller: _passwordController,
+                              textInputType: TextInputType.text,
+                              obscureText: true,
+                              validator: (text) =>
+                                  StackivyValidators.passwordValidator(text!),
+                              prefixIcon: const Icon(
+                                Icons.lock_outline,
+                                color: kGray400,
+                              ),
+                              suffixIcon: const Icon(
+                                Icons.visibility_outlined,
+                                color: kGray400,
+                              ),
+                            ),
+                            const SizedBox(height: 12.0),
+                            InkWell(
+                              onTap: null,
+                              child: Text(
+                                'Forgot Password?',
+                                textAlign: TextAlign.end,
+                                style: StackivyStyle.medium(
+                                    color: kPrimaryColor, fontSize: 11.0),
+                              ),
+                            ),
+                            SizedBox(height: size.height * 0.045),
+                            StackivyButton(
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => DashboardScreen(),
+                                    ),
+                                  );
+                                }
+                              },
+                              title: 'Log In',
+                            ),
+                            SizedBox(height: size.height * 0.05),
+                            StackivyButton(
+                              backgroundColor: Colors.white,
+                              onPressed: () {},
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const FaIcon(
+                                    FontAwesomeIcons.signIn,
+                                    color: kPrimaryColor,
+                                  ),
+                                  SizedBox(width: size.height * 0.02),
+                                  Text(
+                                    'Sign in with SAN ID',
+                                    style: StackivyStyle.bold(
+                                      color: kPrimaryColor,
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: size.height * 0.03),
+                            Text.rich(
+                              TextSpan(
+                                children: [
+                                  const TextSpan(text: 'New User?  '),
+                                  TextSpan(
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap =
+                                          () => Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      GettingStartedScreen(),
+                                                ),
+                                              ),
+                                    text: 'Create Acccount',
+                                    style: StackivyStyle.medium(
+                                      color: kPrimaryColor,
+                                      fontSize: 12.0,
+                                    ),
+                                  ),
+                                ],
+                                style: StackivyStyle.medium(
+                                  color: kGray500,
+                                  fontSize: 12.0,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
