@@ -107,7 +107,7 @@ class RanksCard extends StatelessWidget {
                           : Container(),
                       index == 2 || index == 3
                           ? Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   'Click here',
@@ -116,7 +116,11 @@ class RanksCard extends StatelessWidget {
                                     fontSize: 12.0,
                                   ),
                                 ),
-                                const SizedBox(width: 4.0),
+                                SizedBox(
+                                  width: index == 2
+                                      ? size.width * 0.19
+                                      : size.width * 0.4,
+                                ),
                                 const Icon(
                                   Icons.arrow_forward,
                                   color: Color(0xFF8E15F8),
