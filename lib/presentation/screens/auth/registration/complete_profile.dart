@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stackivy_assesement/presentation/screens/auth/login/login.dart';
 import 'package:stackivy_assesement/presentation/screens/dashboard/dashboard.dart';
 import 'package:stackivy_assesement/style/app_style.dart';
 import 'package:stackivy_assesement/utils/validators.dart';
@@ -174,7 +175,7 @@ class CompleteProfileScreen extends StatelessWidget {
                     if (formKey.currentState!.validate()) {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => DashboardScreen(),
+                          builder: (context) => LoginScreen(),
                         ),
                       );
                     }

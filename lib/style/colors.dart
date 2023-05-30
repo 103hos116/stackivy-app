@@ -12,4 +12,5 @@ const kGreen500 = Color(0xFF22C55E);
 class StackivyColors {
   static const Color harmony = Color(0xFFE6356D);
   static const Color valeViolet = Color(0xFFF6EBFF);
+  static const Color lightGray = Color(0xFFD9D9D9);
 }

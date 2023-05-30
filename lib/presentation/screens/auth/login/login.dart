@@ -10,8 +10,16 @@ import 'package:stackivy_assesement/presentation/widgets/stackivy_text_form_fiel
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../utils/validators.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool showPassword = false;
+
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -32,10 +40,12 @@ class LoginScreen extends StatelessWidget {
               backgroundColor: kPrimaryColor,
               expandedHeight: size.height * 0.2,
               flexibleSpace: FlexibleSpaceBar(
+                expandedTitleScale: 1.0,
                 centerTitle: true,
+                titlePadding: EdgeInsets.zero,
                 title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -49,12 +59,11 @@ class LoginScreen extends StatelessWidget {
                           'Ardilla',
                           style: StackivyStyle.bold(
                             color: Colors.white,
-                            fontSize: 20.0,
+                            fontSize: 28.0,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: size.height * 0.03)
                   ],
                 ),
                 background: SvgPicture.asset(
@@ -123,16 +132,31 @@ class LoginScreen extends StatelessWidget {
                               hintText: 'Password',
                               controller: _passwordController,
                               textInputType: TextInputType.text,
-                              obscureText: true,
+                              obscureText: showPassword ? false : true,
                               validator: (text) =>
                                   StackivyValidators.passwordValidator(text!),
                               prefixIcon: const Icon(
                                 Icons.lock_outline,
                                 color: kGray400,
                               ),
-                              suffixIcon: const Icon(
-                                Icons.visibility_outlined,
-                                color: kGray400,
+                              suffixIcon: InkWell(
+                                onTap: () {
+                                  if (showPassword == false) {
+                                    setState(() {
+                                      showPassword = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      showPassword = false;
+                                    });
+                                  }
+                                },
+                                child: Icon(
+                                  showPassword == true
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
+                                  color: kGray400,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 12.0),

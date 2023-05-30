@@ -29,9 +29,10 @@ class StackivyTextFormField extends StatelessWidget {
       obscureText: obscureText,
       validator: validator,
       style: const TextStyle(
-        color: Colors.blueAccent,
+        color: kPrimaryColor,
         fontSize: 16.0,
       ),
+      cursorColor: kPrimaryColor,
       keyboardType: textInputType,
       decoration: InputDecoration(
         errorMaxLines: 2,
